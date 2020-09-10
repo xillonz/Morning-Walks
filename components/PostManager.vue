@@ -1,18 +1,25 @@
 <template>
     <div>
-        <latest v-if="latest && !isLast" :post="latest" @latest="goToLatest"></latest>
-        <div v-if="post">
+        <!-- <latest v-if="latest && !isLast" :post="latest" @latest="goToLatest"></latest> -->
+        
+        <div v-if="post" >
             <div class="pagination">
                 <button :class="{disabled: isFirst}" @click="previous">Previous</button>
                 <button :class="{disabled: isLast}" @click="next">Next</button>
             </div>
-            <h2>{{post.title}}</h2>
-            <article v-html="post.content.html"></article>
+            <transition name="fade" mode="out-in">
+                <div class="post-content" :key="post.id">
+                    <h2>{{post.title}}</h2>
+                    <p class="sub-text">{{post.date}}</p>
+                    <article v-html="post.content.html"></article>
+                </div>
+            </transition>             
             <div class="pagination">
                 <button :class="{disabled: isFirst}" @click="previous">Previous</button>
                 <button :class="{disabled: isLast}" @click="next">Next</button>
             </div>
-        </div>  
+        </div> 
+        
     </div>
           
 </template>
@@ -94,3 +101,13 @@ export default {
     },    
 }
 </script>
+
+<style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: all .3s;  
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+</style>

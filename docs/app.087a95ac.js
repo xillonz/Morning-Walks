@@ -109,4 +109,4 @@ var t=arguments[3];Object.defineProperty(exports,"__esModule",{value:!0}),export
 },{"graphql-tag":"MbWf"}],"A2T1":[function(require,module,exports) {
 "use strict";var e=a(require("vue")),u=a(require("~/components/App")),r=a(require("apollo-boost")),t=a(require("vue-apollo"));function a(e){return e&&e.__esModule?e:{default:e}}var l=new r.default({uri:"https://api-eu-central-1.graphcms.com/v2/cke0goe2u53fv01xu4890b4x4/master"});e.default.use(t.default);var o=new t.default({defaultClient:l});new e.default({el:"#app",apolloProvider:o,render:function(e){return e(u.default)}});
 },{"vue":"NtAQ","~/components/App":"TC2m","apollo-boost":"Kpmz","vue-apollo":"SvHR"}]},{},["A2T1"], null)
-//# sourceMappingURL=/app.087a95ac.js.map
+//# sourceMappingURL=app.087a95ac.js.map

@@ -1,41 +1,39 @@
 <template>
-    <div>
-        <!-- <latest v-if="latest && !isLast" :post="latest" @latest="goToLatest"></latest> -->
-        
-        <div v-if="post" >
-            <div class="pagination">
-                <button :class="{disabled: isFirst}" @click="previous">Previous</button>
-                <button :class="{disabled: isLast}" @click="next">Next</button>
-            </div>
-            <transition name="fade" mode="out-in">
-                <div class="post-content" :key="post.id">
-                    <h2>{{post.title}}</h2>
-                    <p class="sub-text">{{post.date}}</p>
+    <div id="post" v-if="post">
+        <div class="pagination container">
+            <button :class="{disabled: isFirst}" @click="previous">Previous</button>
+            <button :class="{disabled: isLast}" @click="next">Next</button>
+        </div>
+        <transition name="fade" mode="out-in">
+            <div class="post-content" :key="post.id">
+                <h1>{{post.title}}</h1>
+                <div class="container">
+                    <date :date="post.date"></date>
                     <article v-html="post.content.html"></article>
-                </div>
-            </transition>             
-            <div class="pagination">
-                <button :class="{disabled: isFirst}" @click="previous">Previous</button>
-                <button :class="{disabled: isLast}" @click="next">Next</button>
+                </div>                  
             </div>
-        </div> 
-        
-    </div>
-          
+        </transition>  
+        <button class="share-btn" v-if="shareable" @click="share">Share</button>           
+        <div class="pagination container">
+            <button :class="{disabled: isFirst}" @click="previous">Previous</button>
+            <button :class="{disabled: isLast}" @click="next">Next</button>
+        </div>
+    </div>          
 </template>
 
 <script>
-import Latest from '~/components/Latest'
-import gql from 'graphql-tag'
+import Date from "~/components/Date"
 const STORAGE_KEY = "pageLocation"
 
 export default {
-    components: { Latest },
+    components: { Date },
     data(){
         return {
-            active: null
+            active: null,
+            history: null
         }
     },
+    props: [ "posts" ],
     computed:{
         post(){
             return (this.posts && this.posts.length) ? this.posts[this.active] : null
@@ -46,9 +44,18 @@ export default {
         isLast(){
             return this.active === this.posts.length - 1
         },
-        latest(){
-            return (this.posts) ? this.posts[this.posts.length - 1] : null
-        }        
+        shareable(){
+            return navigator.canShare
+        },      
+    },
+    mounted(){
+        let self = this
+        window.onpopstate = function(event) {
+            if(typeof event.state.active !== 'undefined'){
+                self.history = event.state.active
+                self.active = event.state.active
+            }
+        }
     },
     methods: {
         goToLatest(){
@@ -62,43 +69,48 @@ export default {
         },
         displayPost(){
             let saved = parseInt(localStorage.getItem(STORAGE_KEY));
-            if(saved){
+            let url_parts = window.location.pathname.split('/')
+            let slug = url_parts[url_parts.length - 1]
+            console.log(this.posts)
+            if(slug){
+                this.active = this.posts.findIndex(p => {
+                    return p.slug === slug
+                })
+            }else if(saved && this.posts[saved]){
                 this.active = saved
-            }else{    
+            }else{     
                 this.active = 0
+            }
+        },
+        share(){
+            if (navigator.canShare) {
+                navigator.share({
+                    title: 'Morning Walks - '+this.posts[this.active].title,
+                    text: 'Truths I have discovered from listening to my inner voice',
+                    url: window.location.path
+                }).then(() => console.log('Share was successful.'))
+                  .catch((error) => console.log('Sharing failed', error));
+            } else {
+                console.log(`Your system doesn't support sharing.`);
             }
         }
     },
     watch: {
+        posts(){
+            if(this.posts) this.displayPost()
+        },
         active(val){
             // Save page location to storage
-            if(val !== null) localStorage.setItem(STORAGE_KEY, val);
-        }
-    },
-    apollo: {
-        posts: {
-            query: gql`query {
-                posts(orderBy: date_ASC) {
-                    id
-                    slug
-                    title
-                    date
-                    excerpt
-                    content {
-                        html
-                    }
-                    coverImage {
-                        url
-                    }
-                },
+            if(val !== null){
+                localStorage.setItem(STORAGE_KEY, val);
+                if(this.history !== val){
+                    history.pushState({active: val}, "", "/"+this.posts[val].slug)
+                    this.history = val
+                }
                 
-            }`,
-            result(ApolloQueryResult, key){
-                this.displayPost()
             }
         }
-        
-    },    
+    },   
 }
 </script>
 

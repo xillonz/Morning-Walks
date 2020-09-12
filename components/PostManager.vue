@@ -86,8 +86,7 @@ export default {
             if (navigator.canShare) {
                 navigator.share({
                     title: 'Morning Walks - '+this.posts[this.active].title,
-                    text: 'Truths I have discovered from listening to my inner voice',
-                    url: window.location.path
+                    url: window.location.href
                 }).then(() => console.log('Share was successful.'))
                   .catch((error) => console.log('Sharing failed', error));
             } else {

@@ -71,7 +71,6 @@ export default {
             let saved = parseInt(localStorage.getItem(STORAGE_KEY));
             let url_parts = window.location.pathname.split('/')
             let slug = url_parts[url_parts.length - 1]
-            console.log(this.posts)
             if(slug){
                 this.active = this.posts.findIndex(p => {
                     return p.slug === slug

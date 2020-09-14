@@ -6,7 +6,6 @@
     <title>Morning Walks</title>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
-
         body{
             padding: 0;
             margin: 0;
@@ -47,18 +46,29 @@
         }
 
         header{
-            margin-bottom: 100px;
+            margin: 0;
             padding: 20px;
+            text-align: left;
+        }
+
+        header .logo, header .sub-text{
+            margin: 0;
+            position: relative;
         }
 
         header .logo{
             font-size: 35px;
+            font-family: "Open Sans", sans-serif;
+            text-transform: uppercase;
+            font-weight: bold;
+            line-height: 0.8;
+            margin-bottom: 5px;
         }
 
-        header .logo, header .sub-text{
-            text-align: left;
-            margin: 0;
-            position: relative;
+        
+
+        header .sub-text{
+            font-family: "Lora", serif;
         }
 
         .hamburger{
@@ -100,8 +110,9 @@
             top: 0;
             width: 500px;
             max-width: 100%;
-            min-height: 100vh;
+            height: 100%;
             background: #fff;
+            overflow-y: auto;
             right: -540px;
             transition: right 0.3s ease-out;
             box-shadow: 0 0 20px 0 rgba(0,0,0,.7);
@@ -173,7 +184,6 @@
 
         .post-content{
             margin-top: 10px;
-            margin-bottom: 40px;
         }
 
         .post-content h1{
@@ -213,9 +223,16 @@
             .post-content h1{
                 margin: 20px -20px;
             }
+        }
 
+        @media screen and (max-width: 430px){
             header{
-                margin-bottom: 40px;
+                margin-top: 50px;
+                text-align: center;
+            }
+
+            header .logo{
+                margin-bottom: 20px;
             }
         }
     </style>

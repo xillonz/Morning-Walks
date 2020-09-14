@@ -12,6 +12,10 @@
                     <li v-for="post in posts">
                         <a :href="'/'+post.slug">{{post.title}}</a>
                     </li>
+
+                    <li v-for="i in 20">
+                        <a :href="'/'">test {{i}}</a>
+                    </li>
                 </ul>
             </nav>
         </header>

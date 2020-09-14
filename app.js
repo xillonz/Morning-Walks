@@ -15,6 +15,13 @@ const apolloProvider = new VueApollo({
     defaultClient: apolloClient,
 })
 
+let path = localStorage.getItem('path');
+if(path){
+  history.pushState({}, "", path)
+  localStorage.removeItem('path');
+}
+
+
 new Vue({
     el: '#app',
     apolloProvider,

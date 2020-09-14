@@ -71,10 +71,16 @@ export default {
             let saved = parseInt(localStorage.getItem(STORAGE_KEY));
             let url_parts = window.location.pathname.split('/')
             let slug = url_parts[url_parts.length - 1]
+            let postIndex = -1
+
             if(slug){
-                this.active = this.posts.findIndex(p => {
+                postIndex = this.posts.findIndex(p => {
                     return p.slug === slug
                 })
+            }
+            
+            if(postIndex >= 0){
+                this.active = postIndex
             }else if(saved && this.posts[saved]){
                 this.active = saved
             }else{     

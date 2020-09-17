@@ -45,7 +45,7 @@ export default {
             return this.active === this.posts.length - 1
         },
         shareable(){
-            return navigator.canShare
+            return navigator.share
         },      
     },
     mounted(){
@@ -88,7 +88,7 @@ export default {
             }
         },
         share(){
-            if (navigator.canShare) {
+            if (navigator.share) {
                 navigator.share({
                     title: 'Morning Walks - '+this.posts[this.active].title,
                     url: window.location.href

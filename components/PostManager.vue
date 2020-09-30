@@ -18,15 +18,17 @@
             <button :class="{disabled: isFirst}" @click="previous">Previous</button>
             <button :class="{disabled: isLast}" @click="next">Next</button>
         </div>
+        <comment-list :comments="post.comments" :slug="post.slug"></comment-list>
     </div>          
 </template>
 
 <script>
 import Date from "~/components/Date"
+import CommentList from "~/components/CommentList"
 const STORAGE_KEY = "pageLocation"
 
 export default {
-    components: { Date },
+    components: { Date, CommentList },
     data(){
         return {
             active: null,
@@ -56,6 +58,8 @@ export default {
                 self.active = event.state.active
             }
         }
+
+        
     },
     methods: {
         goToLatest(){
@@ -86,6 +90,8 @@ export default {
             }else{     
                 this.active = 0
             }
+
+            console.log('POST: ', this.post)
         },
         share(){
             if (navigator.share) {
@@ -107,6 +113,7 @@ export default {
             // Save page location to storage
             if(val !== null){
                 localStorage.setItem(STORAGE_KEY, val);
+                window.scrollTo(0, 0);
                 if(this.history !== val){
                     history.pushState({active: val}, "", "/"+this.posts[val].slug)
                     this.history = val

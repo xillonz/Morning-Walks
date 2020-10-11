@@ -24,14 +24,8 @@ export default {
                 content {
                     html
                 }
-                comments {
-                    message
-                    name
-                }
             },
-            
         }`
-        
     }, 
 }
 </script>

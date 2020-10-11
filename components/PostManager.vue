@@ -90,8 +90,6 @@ export default {
             }else{     
                 this.active = 0
             }
-
-            console.log('POST: ', this.post)
         },
         share(){
             if (navigator.share) {

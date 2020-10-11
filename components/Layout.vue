@@ -16,7 +16,9 @@
             </nav>
         </header>
         <main>
+            <unsubscribe></unsubscribe>
             <slot></slot>
+            <subscribe></subscribe>
         </main>
         <footer></footer>
     </div>
@@ -24,15 +26,17 @@
 
 <script>
 import Latest from '~/components/Latest'
+import Subscribe from '~/components/Subscribe'
+import Unsubscribe from '~/components/Unsubscribe'
 
 export default {
-    components: { Latest },
+    components: { Latest, Subscribe, Unsubscribe },
     data(){
         return {
-            open: false
+            open: false,
         }
     },
-    props: [ "posts" ], 
+    props: [ "posts" ],
     computed: {
         latest(){
             return (this.posts) ? this.posts[this.posts.length - 1] : null

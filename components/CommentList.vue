@@ -1,5 +1,5 @@
 <template>
-    <div class="comment-list">
+    <div class="comment-list container">
         <form @submit.prevent="addComment">
             <label for="comment-name">Your Name</label>
             <input v-model="name" id="comment-name" type="text" placeholder="Name">
@@ -7,12 +7,13 @@
             <label for="comment-message">Your Message</label>
             <textarea v-model="message" name="message" id="comment-message" cols="30" rows="10" placeholder="Message"></textarea>
             <p v-if="error">Please enter your name and message</p>
-            <input type="submit" value="Add Comment">
+            <vue-recaptcha class="recaptcha" @verify="human = true" sitekey="6LeMHNcZAAAAALVnQ5cakOMslTFB-0phmVAAQg-9"></vue-recaptcha>
+            <input class="btn" type="submit" value="Add Comment">
         </form>
         <ul>
-            <li v-for="comment in allComments">
-                <p>{{comment.name}}</p>
-                <date :date="comment.createdAt"></date>
+            <li class="comment" v-for="comment in allComments">
+                <p class="comment-name">{{comment.name}}</p>
+                <date class="comment-date" :date="comment.createdAt"></date>
                 <p>{{comment.message}}</p>
             </li>
         </ul>
@@ -20,17 +21,19 @@
 </template>
 
 <script>
+import VueRecaptcha from 'vue-recaptcha';
 import Date from "~/components/Date"
 import gql from 'graphql-tag'
 
 export default {
-    components: { Date },
+    components: { Date, VueRecaptcha },
     data(){
         return {
             newComments: [],
             name: "",
             message: "",
-            error: false
+            error: false,
+            human: false,
         }
     },
     props: [ "slug" ],
@@ -61,7 +64,7 @@ export default {
         addComment(){
             this.error = !this.name || !this.message
 
-            if(this.error) return
+            if(this.error || !this.human) return
 
             const newName = this.name
             const newMessage = this.message

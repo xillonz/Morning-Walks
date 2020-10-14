@@ -3,10 +3,9 @@
         <div v-if="!subscribed">
             <p>Subscribe to recieve an email when there is a new post</p>
             <form @submit.prevent="subscribe">
-                <label for="sub-email">Email Address</label>
-                <input v-model="email" id="sub-email" type="email" placeholder="example@domain.com">
+                <input v-model="email" id="sub-email" type="email" placeholder="Email Address">
                 <p v-if="error">Oops, something went wrong. Try again later.</p>
-                <input type="submit" value="Subscribe">
+                <input class="btn" type="submit" value="Subscribe">
             </form>
         </div>
         <div v-else>

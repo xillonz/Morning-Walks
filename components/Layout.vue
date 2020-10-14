@@ -7,6 +7,7 @@
                 <div></div>
             </div>
             <nav>
+                <subscribe></subscribe>
                 <latest :post="latest" @latest="$emit('latest')"></latest>
                 <ul>
                     <li v-for="post in posts">
@@ -17,8 +18,7 @@
         </header>
         <main>
             <unsubscribe></unsubscribe>
-            <slot></slot>
-            <subscribe></subscribe>
+            <slot></slot>           
         </main>
         <footer></footer>
     </div>

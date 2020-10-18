@@ -22,7 +22,6 @@ export default {
     },
     methods: {
         unsubscribe(){
-            console.log('ID: ', this.id)
             this.$apollo.mutate({
                 // Query
                 mutation: gql`mutation ($id: String!) {

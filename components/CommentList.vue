@@ -1,5 +1,6 @@
 <template>
     <div class="comment-list container">
+        <p>Feel free to leave a comment:</p>
         <form @submit.prevent="addComment">
             <label for="comment-name">Your Name</label>
             <input v-model="name" id="comment-name" type="text" placeholder="Name">

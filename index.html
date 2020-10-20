@@ -46,6 +46,13 @@
             font-family: "Open Sans", sans-serif;
         }
 
+        #wrapper{
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
         header{
             width: 100%;
             box-sizing: border-box;
@@ -136,7 +143,6 @@
 
         nav ul li{
             margin: 20px 0;
-            text-decoration: underline;
         }
 
         .open nav{
@@ -185,6 +191,12 @@
             margin-bottom: 100px;
         }
 
+        nav .post-link .title{
+            text-decoration: none;
+            font-family: "Open Sans", sans-serif;
+            font-weight: bold;
+        }
+
         .post-content{
             margin-top: 10px;
         }
@@ -222,18 +234,23 @@
             color: #25a186;
         }
 
-        .comment-list{
+        .comment-list form, .comment-list ul{
             width: 600px;
         }
 
         form label{
+            font-family: "Open Sans", sans-serif;
             display: block;
+            text-transform: uppercase;
+            font-weight: bold;
             margin-bottom: 5px;
+            font-size: 14px;
         }
 
         form input{
             margin-bottom: 20px;
             padding: 5px;
+            font-family: "Open Sans", sans-serif;
         }
 
         .comment-list textarea{
@@ -275,6 +292,23 @@
 
         .recaptcha{
             margin-bottom: 20px;
+        }
+
+        footer{
+            padding: 30px;
+            text-align: center;
+        }
+
+        #about p{
+            line-height: 1.5;
+        }
+
+        .fade-enter-active, .fade-leave-active {
+            transition: all .3s;  
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+            transform: translateX(-10px);
         }
 
         @media screen and (max-width: 430px){

@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <header :class="{open: open}">
-            <div class="logo">Morning Walks</div>
-            <p class="sub-text">Truths I have discovered from listening to my inner voice</p>
+    <div id="wrapper">
+        <header class="container" :class="{open: open}">
+            <div class="logo" @click="$emit('logo-click')">Morning Walks</div>
+            <p class="sub-text">Finding my truth, one misstep at a time</p>
             <div class="hamburger" @click="open = !open">
                 <div></div>
             </div>
@@ -11,7 +11,10 @@
                 <latest :post="latest" @latest="$emit('latest')"></latest>
                 <ul>
                     <li v-for="post in posts">
-                        <a :href="'/'+post.slug">{{post.title}}</a>
+                        <a class="post-link" :href="'/'+post.slug">
+                            <div class="title">{{post.title}}</div>
+                            <date class="sub-text" :date="post.date"></date>
+                        </a>
                     </li>
                 </ul>
             </nav>
@@ -20,7 +23,9 @@
             <unsubscribe></unsubscribe>
             <slot></slot>           
         </main>
-        <footer></footer>
+        <footer>
+            <a @click="$emit('about-click')">About Me</a>
+        </footer>
     </div>
 </template>
 
@@ -28,9 +33,10 @@
 import Latest from '~/components/Latest'
 import Subscribe from '~/components/Subscribe'
 import Unsubscribe from '~/components/Unsubscribe'
+import Date from "~/components/Date"
 
 export default {
-    components: { Latest, Subscribe, Unsubscribe },
+    components: { Latest, Subscribe, Unsubscribe, Date },
     data(){
         return {
             open: false,

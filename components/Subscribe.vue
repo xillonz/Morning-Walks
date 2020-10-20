@@ -1,7 +1,7 @@
 <template>
     <div class="subscription">
         <div v-if="!subscribed">
-            <p>Subscribe to recieve an email when there is a new post</p>
+            <p>Subscribe</p>
             <form @submit.prevent="subscribe">
                 <input v-model="email" id="sub-email" type="email" placeholder="Email Address">
                 <p v-if="error">Oops, something went wrong. Try again later.</p>

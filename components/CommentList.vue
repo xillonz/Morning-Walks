@@ -1,11 +1,11 @@
 <template>
     <div class="comment-list container">
-        <p>Feel free to leave a comment:</p>
+        <p>Leave a comment:</p>
         <form @submit.prevent="addComment">
-            <label for="comment-name">Your Name</label>
+            <label for="comment-name">Name</label>
             <input v-model="name" id="comment-name" type="text" placeholder="Name">
 
-            <label for="comment-message">Your Message</label>
+            <label for="comment-message">Message</label>
             <textarea v-model="message" name="message" id="comment-message" cols="30" rows="10" placeholder="Message"></textarea>
             <p v-if="error">Please enter your name and message</p>
             <vue-recaptcha class="recaptcha" @verify="human = true" sitekey="6LeMHNcZAAAAALVnQ5cakOMslTFB-0phmVAAQg-9"></vue-recaptcha>

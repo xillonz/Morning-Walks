@@ -122,13 +122,3 @@ export default {
     },   
 }
 </script>
-
-<style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: all .3s;  
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: translateX(-10px);
-}
-</style>

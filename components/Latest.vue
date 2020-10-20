@@ -1,6 +1,6 @@
 <template>
     <div v-if="post" class="latest">
-        <p>Read the Latest Update</p>
+        <p>Read the latest update</p>
         <hr>
         <a :href="'/'+post.slug">
             

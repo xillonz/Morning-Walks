@@ -7,6 +7,7 @@
                 <div></div>
             </div>
             <nav>
+                <p>Subscribe</p>
                 <subscribe></subscribe>
                 <latest :post="latest" @latest="$emit('latest')"></latest>
                 <ul>
@@ -24,7 +25,8 @@
             <slot></slot>           
         </main>
         <footer>
-            <a @click="$emit('about-click')">About Me</a>
+            <subscribe></subscribe>
+            <a @click="$emit('about-click')">About Me</a>               
         </footer>
     </div>
 </template>

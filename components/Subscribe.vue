@@ -1,7 +1,6 @@
 <template>
     <div class="subscription">
         <div v-if="!subscribed">
-            <p>Subscribe</p>
             <form @submit.prevent="subscribe">
                 <input v-model="email" id="sub-email" type="email" placeholder="Email Address">
                 <p v-if="error">Oops, something went wrong. Try again later.</p>
